@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { AuthContext } from 'Store';
 import CheckAttend from './CheckAttend';
 import WrongDay from './WrongDay';
-import { validDay, isWrongAccess, mainTableColumns } from 'Utils';
+import { isWrongAccess, mainTableColumns } from 'Utils';
 import { CHECK_IN, CHECK_OUT, ERROR_MESSAGES } from 'Utils/constants';
 
 import { AllTableService } from 'API';
@@ -157,6 +157,9 @@ const MainPageBody = styled.div`
     background-color: #a477ee;
   }
   .illness {
+    background-color: #a477ee;
+  }
+  .vacation {
     background-color: #a477ee;
   }
 `;

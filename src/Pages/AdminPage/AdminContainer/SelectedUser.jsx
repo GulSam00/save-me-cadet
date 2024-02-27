@@ -12,7 +12,6 @@ const SelectedUser = ({
   onClickChangeRole,
   onClickChangeVacation,
 }) => {
-  console.log('SEelecd : ', userInfo);
   return (
     <div className="box">
       <span className="title">현재 선택 : {userInfo.username}</span>

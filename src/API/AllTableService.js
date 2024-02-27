@@ -1,5 +1,3 @@
-import { instance } from './api';
-
 import {
   doc,
   setDoc,
@@ -81,6 +79,36 @@ const AllTableService = {
 
     try {
       response = await setDoc(dayTableRef, data, { merge: true });
+    } catch (e) {
+      return e;
+    }
+  },
+
+  initTable: async date => {
+    const dayTableRef = doc(db, 'day_table', date);
+    const allParticipants = await getDocs(collection(db, 'user'));
+    try {
+      Promise.all(
+        allParticipants.forEach(async doc => {
+          const data = doc.data();
+          if (data.attendance === '참가') {
+            const body = {
+              [`${data.username}`]: {
+                username: data.username,
+                attendance: data.attendance,
+                role: data.role,
+                team: data.team,
+                absentScore: data.absentScore,
+                attendanceScore: data.attendanceScore,
+                checkIn: 'NONE',
+                checkOut: 'NONE',
+              },
+            };
+            await setDoc(dayTableRef, body, { merge: true });
+          }
+        }),
+      );
+      return 0;
     } catch (e) {
       return e;
     }

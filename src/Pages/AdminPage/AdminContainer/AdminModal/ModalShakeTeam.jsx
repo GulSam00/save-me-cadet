@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 
 const shuffleArray = array => {
   for (let i = 0; i < array.length; i++) {
-    let j = Math.floor(Math.random() * (i + 1));
+    let j = Math.floor(Math.random() * array.length);
     const temp = array[i];
     array[i] = array[j];
     array[j] = temp;
@@ -30,7 +30,7 @@ const ModalShakeTeam = ({ setIsOpen, attendUser, getUser }) => {
 
   const handleCloseModal = isAccept => {
     if (isAccept && isChanged) {
-      curUsers.map(user => {
+      curUsers?.map(user => {
         onClickChangeShuffleTeam(user.username, user.team);
       });
     }
@@ -39,17 +39,18 @@ const ModalShakeTeam = ({ setIsOpen, attendUser, getUser }) => {
 
   const handleShakeTeam = () => {
     setIsChanged(true);
-    const shakedUsers = shuffleArray(curUsers);
-    const leastMember = shakedUsers.length / (teamList.length - 1);
-    for (let i = 0; i < shakedUsers.length; i++) {
-      let teamIndex = Math.floor(i / leastMember);
-      shakedUsers[i].team = teamList[teamIndex];
+    const shuffledUsers = shuffleArray(curUsers);
+
+    const shuffledUsersLength = shuffledUsers.length;
+    const teamLength = teamList.length - 1;
+
+    for (let i = 0; i < shuffledUsersLength; i++) {
+      shuffledUsers[i].team = teamList[i % teamLength];
     }
-    setCurUsers(shakedUsers);
+    setCurUsers([...shuffledUsers]);
   };
 
   useEffect(() => {
-    console.log('att', attendUser);
     setCurUsers(attendUser);
   }, []);
 
@@ -62,7 +63,7 @@ const ModalShakeTeam = ({ setIsOpen, attendUser, getUser }) => {
           <Team key={team}>
             <h4>{team}</h4>
             <Members>
-              {curUsers.map((user, i) => {
+              {curUsers?.map((user, i) => {
                 if (user.team === team)
                   return (
                     <MemberEach key={i} team={team}>

@@ -38,7 +38,7 @@ const LoginForm = ({ onClickLogin }) => {
       <LoginFormID>
         <LoginFormIDInput
           value={id}
-          placeholder="인트라 ID"
+          placeholder="ID"
           onChange={handleChangeId}
           onKeyPress={handlePressEnter}
         />

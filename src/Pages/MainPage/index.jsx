@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 
 import { AuthContext } from 'Store';
-import { isWrongAccess } from 'Utils';
+import { isWrongAccess, validDay } from 'Utils';
 import { CusDatePicker } from 'Components';
 import { useTable } from 'Hooks/dayTable';
 
@@ -30,24 +30,6 @@ const MainPage = () => {
 
   const client = useQueryClient();
 
-  const updateSelectData = curTab => {
-    // 마운트 되었을 때 updateSelectData 함수를 호출한 시점에서
-    // useState의 비동기 호출 때문에 rowData에는 null이 들어가 있다.
-    // 부득이 하게 중복된 코드를 useEffect로 호출되는 getUsers에 넣어서
-    // 마운트 되는 시점에 한해서만 API로 받아온 데이터를 집어넣게 했다.
-
-    if (curTab === TEAM_ID.ALL) setSelectRowData(rowData);
-    else {
-      const team = curTab === TEAM_ID.BLUE ? TEAM_NAME.BLUE : TEAM_NAME.RED;
-
-      setSelectRowData(
-        rowData.filter(data => {
-          return data.team === team;
-        }),
-      );
-    }
-  };
-
   const handleChangeTab = (event, dstTab) => {
     setTab(dstTab);
     updateSelectData(dstTab);
@@ -67,12 +49,7 @@ const MainPage = () => {
       case '결석':
         customData[4] = !customData[4];
         break;
-      case '휴가':
-        customData[5] = !customData[5];
-        break;
-      case '목표':
-        customData[8] = !customData[8];
-        break;
+
       default:
     }
     const newArray = [...customData];
@@ -81,9 +58,25 @@ const MainPage = () => {
     localStorage.setItem('customData', JSON.stringify(newArray));
   };
 
+  const initData = async () => {
+    if (validDay(date) !== 0) return;
+    const dateFormat = format(date, 'yyyyMMdd');
+
+    const result = await AllTableService.initTable(dateFormat);
+    if (result === 0) {
+      refresh();
+      // 어쩔 수 없이 새로 고침
+      location.reload();
+    }
+  };
+
   const getUsers = () => {
     if (stat === 'loading') {
       setSelectRowData(null);
+      return;
+    }
+    if (rowData.length === 0) {
+      initData();
       return;
     }
 
@@ -102,7 +95,23 @@ const MainPage = () => {
       );
     }
   };
+  const updateSelectData = curTab => {
+    // 마운트 되었을 때 updateSelectData 함수를 호출한 시점에서
+    // useState의 비동기 호출 때문에 rowData에는 null이 들어가 있다.
+    // 부득이 하게 중복된 코드를 useEffect로 호출되는 getUsers에 넣어서
+    // 마운트 되는 시점에 한해서만 API로 받아온 데이터를 집어넣게 했다.
 
+    if (curTab === TEAM_ID.ALL) setSelectRowData(rowData);
+    else {
+      const team = curTab === TEAM_ID.BLUE ? TEAM_NAME.BLUE : TEAM_NAME.RED;
+
+      setSelectRowData(
+        rowData.filter(data => {
+          return data.team === team;
+        }),
+      );
+    }
+  };
   const handleChangeAllCheck = async (select, value) => {
     if (isWrongAccess(role)) {
       alert('수정 권한이 없습니다.');
@@ -160,6 +169,11 @@ const MainPage = () => {
     refresh();
   };
 
+  const refresh = () => {
+    const dateFormat = format(date, 'yyyyMMdd');
+    client.invalidateQueries(['dayTable', dateFormat]);
+  };
+
   useEffect(() => {
     getUsers();
   }, [rowData, date]);
@@ -170,15 +184,9 @@ const MainPage = () => {
     // 전체 칼럼의 true, false 만을 저장하고 필터링은 MainPageTable에서 진행한다.
   }, []);
 
-  const refresh = () => {
-    console.log('refresh');
-    const dateFormat = format(date, 'yyyyMMdd');
-    client.invalidateQueries(['dayTable', dateFormat]);
-  };
-
   return (
     <MainPageContainer>
-      {selectRowData ? (
+      {selectRowData && validDay(date) === 0 ? (
         <>
           <MainHeader>
             <CusDatePicker date={date} setDate={setDate} filterWeekend={true} />
@@ -205,7 +213,7 @@ const MainPage = () => {
           <MainHeader>
             <CusDatePicker date={date} setDate={setDate} />
           </MainHeader>
-          <WrongDay wrongType={ERROR_MESSAGES.NO_DATA} />
+          <WrongDay wrongType={validDay(date)} />
         </>
       )}
       {isOpen && (

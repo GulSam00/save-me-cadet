@@ -50,7 +50,7 @@ const Register = ({ onClickRegister }) => {
         <RegisterInputForm>
           <RegisterInput
             value={id}
-            placeholder="인트라 ID"
+            placeholder="ID"
             onChange={handleChangeId}
             onKeyPress={handlePressEnter}
             autoFocus

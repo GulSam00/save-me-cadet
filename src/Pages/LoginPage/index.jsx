@@ -21,7 +21,6 @@ const LoginPage = () => {
 
     auth.setIsLoading(true);
     const result = await CRUDUserService.postLogin(body);
-    console.log('result : ', result);
     if (!result) {
       alert('잘못된 아이디나 비밀번호 입니다!');
       return;

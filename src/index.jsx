@@ -4,10 +4,10 @@ import App from 'App';
 import reportWebVitals from 'reportWebVitals';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
+import './index.css';
 
 const queryClient = new QueryClient();
 
-import './index.css';
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
