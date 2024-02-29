@@ -12,19 +12,22 @@ const SelectedUser = ({
   onClickChangeRole,
   onClickChangeVacation,
 }) => {
+  console.log('SEelecd : ', userInfo);
   return (
     <div className="box">
-      <span className="title">현재 선택 : {userInfo.username}</span>
+      <div className="header">
+        <span className="title">현재 선택 : {userInfo.username}</span>
 
-      <span className="user-status">
-        <Chip label={userInfo.attendance} className={userInfo.attendance} />
-        {userInfo.attendance === '참가' && (
-          <>
-            <Chip label={userInfo.team} className={userInfo.team} />
-            <Chip label={userInfo.role} className={userInfo.role} />
-          </>
-        )}
-      </span>
+        <span className="user-status">
+          <Chip label={userInfo.attendance} className={userInfo.attendance} />
+          {userInfo.attendance === '참가' && (
+            <>
+              <Chip label={userInfo.team} className={userInfo.team} />
+              <Chip label={userInfo.role} className={userInfo.role} />
+            </>
+          )}
+        </span>
+      </div>
 
       <div className="action">
         <Select

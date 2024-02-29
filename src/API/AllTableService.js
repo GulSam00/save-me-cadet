@@ -61,7 +61,7 @@ const AllTableService = {
     for (const key in data) {
       newArray.push({
         username: data[key].username,
-        attendance: data[key].attendance,
+        attendanceScore: data[key].attendanceScore,
         role: data[key].role,
         team: data[key].team,
         absentScore: data[key].absentScore,

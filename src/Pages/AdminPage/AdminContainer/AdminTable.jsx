@@ -68,34 +68,34 @@ const AdminTableContainer = styled.div`
     border-radius: 10em;
     text-align: center;
   }
-  .PARTICIPATED {
+  .참가 {
     color: black;
     border: 1px solid black;
     background-color: white;
   }
-
-  .NOT_PARTICIPATED {
+  .불참 {
     color: white;
     background-color: black;
   }
+
   .RED {
     background-color: #dc143c;
   }
   .BLUE {
     background-color: #0079f0;
   }
-  .ROLE_ADMIN {
+  .관리자 {
     background-color: #ff8c00;
   }
 
-  .ROLE_MANAGER {
+  .머슴 {
     background-color: #ffff00;
   }
 
-  .ROLE_USER {
+  .일반 {
     background-color: #aeb7ba;
   }
-  .ROLE_UNAUTHORIZED {
+  .게스트 {
     background-color: #575b5d;
   }
 `;

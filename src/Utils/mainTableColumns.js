@@ -1,8 +1,5 @@
 import React from 'react';
 import { GetCheckIcons } from 'Components';
-import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
-import { ROLE_NAME } from 'Utils/constants';
 
 const mainTableColumns = [
   {
@@ -10,20 +7,18 @@ const mainTableColumns = [
     headerName: '팀',
     width: 120,
 
-    // renderCell: params => {
-    //   return <div className={`${params.value} info`}>{params.value}</div>;
-    // },
+    renderCell: params => {
+      return <div className={`${params.value} info`}>{params.value}</div>;
+    },
   },
   {
     field: 'role',
     headerName: '역할',
     width: 120,
 
-    // renderCell: params => {
-    //   return (
-    //     <div className={`${params.value} info`}>{ROLE_NAME[params.value]}</div>
-    //   );
-    // },
+    renderCell: params => {
+      return <div className={`${params.value} info`}>{params.value}</div>;
+    },
   },
   {
     field: 'username',
@@ -34,11 +29,14 @@ const mainTableColumns = [
     field: 'attendanceScore',
     headerName: '출석 점수',
     width: 120,
+    type: 'number',
   },
+
   {
     field: 'absentScore',
     headerName: '결석 점수',
     width: 120,
+    type: 'number',
   },
 
   {

@@ -71,6 +71,7 @@ const MainPage = () => {
   };
 
   const getUsers = () => {
+    console.log('row : ', rowData);
     if (stat === 'loading') {
       setSelectRowData(null);
       return;

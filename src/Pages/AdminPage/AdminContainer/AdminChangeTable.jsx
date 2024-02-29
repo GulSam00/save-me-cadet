@@ -93,6 +93,11 @@ const AdminChangeTableBody = styled.div`
   padding: 1em;
   height: 50%;
 
+  .header {
+    max-width: 560px;
+    display: flex;
+    justify-content: space-between;
+  }
   .action > * {
     color: #292929;
     width: 8em;
@@ -102,35 +107,40 @@ const AdminChangeTableBody = styled.div`
   .user-status > * {
     margin: 0.4em;
   }
+  .title {
+    font-weight: bold;
 
-  .PARTICIPATED {
+    margin: 0.5em 0 0.5em 0;
+  }
+
+  .참가 {
     color: black;
     border: 1px solid black;
     background-color: white;
   }
-
-  .NOT_PARTICIPATED {
+  .불참 {
     color: white;
     background-color: black;
   }
+
   .RED {
     background-color: #dc143c;
   }
   .BLUE {
     background-color: #0079f0;
   }
-  .ROLE_ADMIN {
+  .관리자 {
     background-color: #ff8c00;
   }
 
-  .ROLE_MANAGER {
+  .머슴 {
     background-color: #ffff00;
   }
 
-  .ROLE_USER {
+  .일반 {
     background-color: #aeb7ba;
   }
-  .ROLE_UNAUTHORIZED {
+  .게스트 {
     background-color: #575b5d;
   }
 `;

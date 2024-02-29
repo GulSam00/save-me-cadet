@@ -4,12 +4,15 @@ const adminTableColumns = [
     headerName: '참여 상태',
     type: 'string',
     width: 120,
+    renderCell: params => {
+      return <div className={`${params.value} info`}>{params.value}</div>;
+    },
   },
   {
     field: 'team',
     headerName: '팀',
-    type: 'string',
     width: 120,
+
     renderCell: params => {
       return <div className={`${params.value} info`}>{params.value}</div>;
     },
@@ -17,8 +20,11 @@ const adminTableColumns = [
   {
     field: 'role',
     headerName: '역할',
-    type: 'string',
     width: 120,
+
+    renderCell: params => {
+      return <div className={`${params.value} info`}>{params.value}</div>;
+    },
   },
 
   {
