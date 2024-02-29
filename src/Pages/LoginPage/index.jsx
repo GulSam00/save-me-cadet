@@ -65,8 +65,11 @@ const LoginPage = () => {
           <img src="/asset/saveme.png" alt="logo" />
           <LoginMainTitle>구해줘 카뎃</LoginMainTitle>
         </LoginMain>
+        <span>admin - admin으로 로그인 가능</span>
+
         <LoginForm onClickLogin={handleLogin} />
         <Register onClickRegister={handleRegister} />
+
         <FooterWrap>
           <BugReportButton />
         </FooterWrap>
@@ -84,9 +87,9 @@ const LoginBackground = styled.div`
   align-items: center;
 
   text-align: center;
+  color: white;
   background-image: url('/asset/login.jpg');
   background-size: cover;
-  // background-color: #220646;
 
   // size
   width: 100%;
