@@ -8,6 +8,34 @@ import {
 } from 'firebase/firestore/lite';
 import db from '../firebase';
 
+// putTableCheckIn: async (username, date, value) => {
+//   const dayTableRef = doc(db, 'day_table', date);
+//   const score = transScore(value);
+//   let data = { [`${username}.checkIn`]: value };
+//   let response;
+//   if (score !== 0) {
+//     const userRef = doc(db, 'user', username);
+//     const user = await getDoc(userRef);
+//     const userData = user.data();
+//     if (score === 1) {
+//       userData.attendanceScore += 1;
+//     } else if (score === -0.5) {
+//       userData.absentScore += 0.5;
+//     } else {
+//       userData.absentScore += 1;
+//     }
+//     await setDoc(userRef, userData);
+//      data = { [`${username}.checkIn`]: value, [`${username}.attendanceScore`]: userData.attendanceScore, [`${username}.absentScore`]: userData.absentScore };
+//   }
+
+//   try {
+//     response = await updateDoc(dayTableRef, data);
+//   } catch (e) {
+//     alert(e);
+//   }
+//   return response;
+// },
+
 const AllTableService = {
   /**
    * 출석 체크인

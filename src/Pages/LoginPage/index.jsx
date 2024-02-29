@@ -37,7 +37,7 @@ const LoginPage = () => {
     const data = {
       [`${result.username}`]: {
         username: result.username,
-        attendance: result.attendance,
+        attendanceScore: result.attendanceScore,
         role: result.role,
         team: result.team,
         absentScore: result.absentScore,
