@@ -12,7 +12,6 @@ const SelectedUser = ({
   onClickChangeRole,
   onClickChangeVacation,
 }) => {
-  console.log('SEelecd : ', userInfo);
   return (
     <div className="box">
       <div className="header">

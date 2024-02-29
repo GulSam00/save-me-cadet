@@ -1,5 +1,4 @@
 import { CRUDUserService } from 'API';
-import { TEAM_NAME } from 'Utils/constants';
 import SelectedUser from './SelectedUser';
 
 import styled from 'styled-components';
@@ -10,6 +9,7 @@ const AdminChangeTable = ({
   getUser,
   username,
   auth,
+  changeTable,
 }) => {
   const handleLogout = async () => {
     localStorage.clear();
@@ -50,6 +50,7 @@ const AdminChangeTable = ({
       attendance: event.target.value,
     });
     getUser();
+    changeTable();
   };
 
   const handleChangeTeam = async event => {
@@ -57,7 +58,7 @@ const AdminChangeTable = ({
       team: event.target.value,
     });
     getUser();
-    // setSelectusername(null);
+    changeTable();
   };
 
   const handleChangeRole = async event => {
@@ -67,6 +68,7 @@ const AdminChangeTable = ({
       role: event.target.value,
     });
     getUser();
+    changeTable();
   };
 
   return (

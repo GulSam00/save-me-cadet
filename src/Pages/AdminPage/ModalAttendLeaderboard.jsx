@@ -7,18 +7,13 @@ const ModalAttendLeaderboard = ({ setIsOpen, attendUser }) => {
     if (a.attendanceScore === b.attendanceScore) {
       if (a.absentScore < b.absentScore) return -1;
       else if (a.absentScore > b.absentScore) return 1;
-      // 아오지 업데이트 되면 교체
       else return 0;
     }
     if (a.attendanceScore > b.attendanceScore) return -1;
     if (a.attendanceScore < b.attendanceScore) return 1;
     return 0;
   });
-  // const isVaildLeaderboard = index => {
-  //   if (sortArray.length <= index) return -1;
-  //   if (sortArray[index].attendanceScore === 0) return -1;
-  //   return 0;
-  // };
+
   return (
     <ModalAttendLeaderboardBody>
       <h1>월렛 보상 대상</h1>
@@ -27,13 +22,7 @@ const ModalAttendLeaderboard = ({ setIsOpen, attendUser }) => {
         1)됩니다.
       </h3>
       <h3>출석 점수가 동일할 경우, 결석 시간을 비교합니다.</h3>
-      {/* {sortArray.map((e, i) => {
-        return (
-          <h1 key={i}>
-            {i + 1}등 - {e.username} {e.attendanceScore}
-          </h1>
-        );
-      })} */}
+
       {attendUser.length === 0 ? (
         ''
       ) : (

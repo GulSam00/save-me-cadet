@@ -16,7 +16,7 @@ const shuffleArray = array => {
   return array;
 };
 
-const ModalShakeTeam = ({ setIsOpen, attendUser, getUser }) => {
+const ModalShakeTeam = ({ setIsOpen, attendUser, getUser, changeTable }) => {
   const [curUsers, setCurUsers] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
 
@@ -26,6 +26,7 @@ const ModalShakeTeam = ({ setIsOpen, attendUser, getUser }) => {
   const onClickChangeShuffleTeam = async (username, team) => {
     await CRUDUserService.updateUser(username, { team: team });
     getUser();
+    changeTable();
   };
 
   const handleCloseModal = isAccept => {

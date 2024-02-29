@@ -8,7 +8,7 @@ import AdminModal from './AdminModal';
 
 import { PARTICIPATE_NAME } from 'Utils/constants';
 
-const AdminContainer = ({ auth, username, isOpen, setIsOpen }) => {
+const AdminContainer = ({ auth, username, isOpen, setIsOpen, changeTable }) => {
   const [selectusername, setSelectusername] = useState(null);
 
   const [tab, setTab] = useState(0);
@@ -66,6 +66,7 @@ const AdminContainer = ({ auth, username, isOpen, setIsOpen }) => {
         getUser={getUser}
         username={username}
         auth={auth}
+        changeTable={changeTable}
       />
       <AdminModal
         isOpen={isOpen}
@@ -73,6 +74,7 @@ const AdminContainer = ({ auth, username, isOpen, setIsOpen }) => {
         rowData={rowData}
         getUser={getUser}
         setSelectusername={setSelectusername}
+        changeTable={changeTable}
       />
     </>
   );

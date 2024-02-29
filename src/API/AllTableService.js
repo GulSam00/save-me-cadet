@@ -121,18 +121,14 @@ const AllTableService = {
           const data = doc.data();
           if (data.attendance === '참가') {
             const body = {
-              [`${data.username}`]: {
-                username: data.username,
-                attendance: data.attendance,
-                role: data.role,
-                team: data.team,
-                absentScore: data.absentScore,
-                attendanceScore: data.attendanceScore,
-                checkIn: 'NONE',
-                checkOut: 'NONE',
-              },
+              [`${data.username}.username`]: data.username,
+              [`${data.username}.attendance`]: data.attendance,
+              [`${data.username}.role`]: data.role,
+              [`${data.username}.team`]: data.team,
+              [`${data.username}.absentScore`]: data.absentScore,
+              [`${data.username}.attendanceScore`]: data.attendanceScore,
             };
-            await setDoc(dayTableRef, body, { merge: true });
+            await updateDoc(dayTableRef, body);
           }
         }),
       );

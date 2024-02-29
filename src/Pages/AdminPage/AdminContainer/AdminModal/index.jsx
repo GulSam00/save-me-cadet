@@ -2,7 +2,7 @@ import ModalAttendLeaderboard from './ModalAttendLeaderboard';
 import ModalShakeTeam from './ModalShakeTeam';
 import ModalAdminGuide from './ModalAdminGuide';
 
-const AdminModal = ({ setIsOpen, isOpen, rowData, getUser }) => {
+const AdminModal = ({ setIsOpen, isOpen, rowData, getUser, changeTable }) => {
   const attendUser = rowData?.filter(user => user.attendance === '참가');
   return (
     <>
@@ -14,6 +14,7 @@ const AdminModal = ({ setIsOpen, isOpen, rowData, getUser }) => {
           setIsOpen={setIsOpen}
           attendUser={attendUser}
           getUser={getUser}
+          changeTable={changeTable}
         />
       )}
       {isOpen === 'todo' && (

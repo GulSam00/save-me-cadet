@@ -1,10 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ShowToday } from 'Components';
 import AdminBody from './AdminBody';
-// import NewUserForm from './NewUserForm';
 
 import styled from 'styled-components';
-import { useRef } from 'react';
 
 const AdminPage = () => {
   const date = useRef(new Date());
@@ -22,7 +20,7 @@ const AdminPage = () => {
         <ShowToday date={date.current} />
       </AdminHeader>
 
-      <AdminBody isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AdminBody isOpen={isOpen} setIsOpen={setIsOpen} date={date.current} />
     </AdminBackground>
   );
 };
